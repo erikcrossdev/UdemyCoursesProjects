@@ -26,7 +26,9 @@ public class AttributeManager : MonoBehaviour
     private const string WIPE = "WIPE";
     //static public int MAGIC = 16;
     public Text attributeDisplay;
-    ATTRIBUTES attributes = 0;
+    private ATTRIBUTES attributes = 0;
+    public ATTRIBUTES Attributes => attributes;
+
    
     void Update()
     {
