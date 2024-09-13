@@ -24,7 +24,6 @@ public class AttributeManager : MonoBehaviour
     private const string INTELLIGENCE = "INTELLIGENCE";
     private const string INVISIBLE = "INVISIBLE";
     private const string WIPE = "WIPE";
-    //static public int MAGIC = 16;
     public Text attributeDisplay;
     private ATTRIBUTES attributes = 0;
     public ATTRIBUTES Attributes => attributes;
