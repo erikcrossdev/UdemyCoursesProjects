@@ -14,6 +14,14 @@ TagManager:
   - REMOVE_MULT
   - WIPE
   - MAGIC_DOOR
+  - BLUE_KEY
+  - YELLOW_KEY
+  - GREEN_DOOR
+  - BLUE_DOOR
+  - YELLOW_DOOR
+  - GREEN_KEY
+  - RED_KEY
+  - PURPLE_DOOR
   layers:
   - Default
   - TransparentFX
@@ -21,10 +29,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Sphere
+  - Cube
+  - Capsule
+  - Cylinder
   - 
   - 
   - 
