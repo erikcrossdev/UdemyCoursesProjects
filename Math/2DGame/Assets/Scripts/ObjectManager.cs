@@ -7,8 +7,8 @@ public class ObjectManager : MonoBehaviour
     public GameObject objPrefab;
     public Vector3 objectPosition;
 
- 
-    void Start()
+ //Instantiate on awake for object position update first
+    void Awake()
     {
         GameObject obj = Instantiate(objPrefab, new Vector3(Random.Range(-100, 100),
                                                             Random.Range(-100,100),
@@ -16,7 +16,7 @@ public class ObjectManager : MonoBehaviour
                                                             Quaternion.identity);
         objectPosition = obj.transform.position;
 
-        Debug.Log("Fuel Location " + obj.transform.position);
+        //Debug.Log("Fuel Location " + obj.transform.position);
     }
 
 }
