@@ -15,6 +15,10 @@ public class DriveToPointNormalized : MonoBehaviour
         Coords dirNormal = HolisticMath.GetNormal(new Coords(direction));
         direction = dirNormal.ToVector();
 
+        //0,1,0 is the up vector
+        float angle = HolisticMath.Angle(new(0,1,0), new Coords(direction));
+        Coords newDir = HolisticMath.Rotate(new(0, 1, 0), angle);
+        transform.up = new Vector3(newDir.x, newDir.y, newDir.z);
         //Or to use unity built in code:
         // direction = Vector3.Normalize(fuel.transform.position - transform.position);
     }
