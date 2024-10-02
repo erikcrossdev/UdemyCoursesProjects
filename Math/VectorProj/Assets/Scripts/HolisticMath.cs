@@ -43,11 +43,27 @@ public class HolisticMath
         return Angle(vector1, vector2) * 180/Mathf.PI;
     }
 
-    static public Coords Rotate(Coords vector, float angle) //angle in radians
+    static public Coords Rotate(Coords vector, float angle, bool clockwise) //angle in radians
     {
+        if(clockwise)
+        {
+            angle = 2 * Mathf.PI - angle; //2 * Mathf.PI is 360 in radians
+        }
+
         float xVal = vector.x * Mathf.Cos(angle) - vector.y * Mathf.Sin(angle);
         float yVal = vector.x * Mathf.Sin(angle) + vector.y * Mathf.Cos(angle);
 
         return new Coords(xVal, yVal , 0);
+    }
+
+    //vector 1 needs to be the facing direction and vector2 the desired direction
+    //because Cross product the order matter
+    static public Coords Cross(Coords vector1, Coords vector2) 
+    {
+        //easy way to remember
+        return new Coords(vector1.y * vector2.z - vector1.z * vector2.y, //x do not have x
+                          vector1.z * vector1.x - vector1.x * vector2.z, //y do not have y
+                          vector1.x * vector2.y - vector1.y * vector2.x); //z do not have z
+    
     }
 }
