@@ -66,4 +66,31 @@ public class HolisticMath
                           vector1.x * vector2.y - vector1.y * vector2.x); //z do not have z
     
     }
+
+    static public Coords LookAt2D (Coords forward, Coords direction) {
+        float angle = Angle(forward, direction);
+        //transform.up = 0,1,0 
+        bool clockwise = false;
+        if (Cross(forward, direction).z < 0)
+        {
+            clockwise = true;
+        }
+        Coords newDir = Rotate(forward, angle, clockwise);
+        return newDir;
+    }
+
+    static public Coords LookAt2D(Coords forwardVector, Coords position, Coords focusPoint) 
+    {
+        Coords direction = new Coords(focusPoint.x - position.x, 
+                                      focusPoint.y - position.y,  
+                                      focusPoint.z - position.z);
+        float angle = Angle(forwardVector, direction);
+        bool clockwise = false;
+        if(Cross(forwardVector, direction).z < 0)
+        {
+            clockwise = true;
+        }
+        Coords newDir = Rotate(forwardVector, angle, clockwise);
+        return newDir;
+    }
 }
