@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI fuelPosition;
     public TextMeshProUGUI energyAmount;
     public TMP_InputField inputField;
+    public TMP_InputField inputFieldAngle;
 
     public void AddEnergy() 
     {
@@ -18,6 +19,14 @@ public class UIManager : MonoBehaviour
         if (float.TryParse(inputField.text, out number)) {
             energyAmount.text = inputField.text;
         }  
+    }
+
+    public void ChangeAngle() {
+        float number;
+        if (float.TryParse(inputFieldAngle.text, out number))
+        {
+            tank.GetComponent<DriveAngleInput>().ChangeAngle(number);
+        }
     }
 
     void Start()
