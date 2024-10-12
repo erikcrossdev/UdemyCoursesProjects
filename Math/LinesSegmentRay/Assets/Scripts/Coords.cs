@@ -39,6 +39,11 @@ public class Coords {
         return new Vector3(x, y, z);
     }
 
+    static public Coords Perp(Coords v) {
+
+        return new Coords(-v.y, v.x);
+    }
+
     static public void DrawLine(Coords startPoint, Coords endPoint, float width, Color colour)
     {
         GameObject line = new GameObject("Line_" + startPoint.ToString() + "_" + endPoint.ToString());
@@ -63,6 +68,18 @@ public class Coords {
         lineRenderer.SetPosition(1, new Vector3(position.x + width / 3.0f, position.y + width / 3.0f, position.z));
         lineRenderer.startWidth = width;
         lineRenderer.endWidth = width;
+    }
+
+    //overload for operator - and +
+    static public Coords operator+(Coords a, Coords b)
+    {
+        Coords c = new Coords(a.x + b.x, a.y+b.y, a.z + b.z);
+        return c;
+    }
+
+    static public Coords operator- (Coords a, Coords b) {
+        Coords c = new Coords(a.x - b.x, a.y - b.y, a.z - b.z);
+        return c;
     }
 
 }
