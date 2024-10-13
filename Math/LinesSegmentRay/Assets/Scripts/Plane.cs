@@ -5,6 +5,9 @@ using UnityEngine;
 public class Plane 
 {
     Coords A, B, C, v, u;
+    public Coords Avec => A;
+    public Coords Vvec => v;
+    public Coords Uvec => u;
 
     public Plane(Coords _A, Coords _B, Coords _C) { 
         A = _A;
