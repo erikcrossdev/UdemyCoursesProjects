@@ -35,10 +35,12 @@ public class Line
 
     public Coords Reflect(Coords normal) {
 
-        var norm = normal.GetNormal();
-        var vnorm = v.GetNormal();
+        Coords norm = normal.GetNormal();
+        Coords vnorm = v.GetNormal();
 
         float dot = HolisticMath.Dot(norm, vnorm);
+
+        if (dot == 0) return v;
 
         float vn2 = dot * 2;
 
