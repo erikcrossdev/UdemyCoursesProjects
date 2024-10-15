@@ -40,7 +40,7 @@ public class Line
 
         float dot = HolisticMath.Dot(norm, vnorm);
 
-        if (dot == 0) return v;
+        if (dot == 0) return v; //return the v if is paralel
 
         float vn2 = dot * 2;
 
