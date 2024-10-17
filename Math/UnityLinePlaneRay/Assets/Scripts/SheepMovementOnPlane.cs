@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class SheepMovementOnPlane : MonoBehaviour
 {
-    //[SerializeField] Transform corner1;
-    //[SerializeField] Transform corner2;
-    //[SerializeField] Transform corner3;
     [SerializeField] GameObject quad;
+    [SerializeField] GameObject[] fences;
+    Vector3[] fencesNormals;
 
     [SerializeField] GameObject sphere;
 
@@ -20,10 +19,19 @@ public class SheepMovementOnPlane : MonoBehaviour
             quad.transform.TransformPoint(verticies[1] + new Vector3(0, 2.9f, 0)),
             quad.transform.TransformPoint(verticies[2] + new Vector3(0, 2.9f, 0))
             );
-        //mPlane = new Plane(corner1.position, corner2.position, corner3.position);
+
         Debug.Log(verticies[0]);
         Debug.Log(verticies[1]);
         Debug.Log(verticies[2]);
+
+        fencesNormals = new Vector3[fences.Length];
+        for (int i = 0; i < fences.Length; i++)
+        {
+            //get the normal of the mesh
+            Vector3 normal = fences[i].GetComponent<MeshFilter>().mesh.normals[0]; //they are quads, so the normals are equal
+            //we need to transform to world position
+            fencesNormals[i] = fences[i].transform.TransformVector(normal);
+        }
     }
 
     // Update is called once per frame
@@ -37,11 +45,17 @@ public class SheepMovementOnPlane : MonoBehaviour
             if (mPlane.Raycast(ray, out t))
             {
                 Vector3 hitPoint = ray.GetPoint(t);
-                float hitPointX = hitPoint.x;
-                float hitPointZ = hitPoint.z;
-                //keep sheep in the bounds of the plane
-                if(hitPointX >= -6 && hitPointX <= 6 && hitPointZ >= -6 && hitPointZ<= 6)
+
+                bool insideFence = true;
+                for (int i = 0; i < fences.Length; i++)
+                {
+                    Vector3 hitPointToFence = fences[i].transform.position - hitPoint;
+                    insideFence = insideFence && Vector3.Dot(hitPointToFence, fencesNormals[i]) <= 0;
+                }
+                if (insideFence)
+                {
                     sphere.transform.position = hitPoint;
+                }
             }
         }
 
