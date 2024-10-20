@@ -11,15 +11,21 @@ public class CreateMatrix : MonoBehaviour
         Matrix m = new Matrix(2, 3, vals);
         Debug.Log(m.ToString());
 
-        float[] vals2 = { 1, 1, 1, 1, 1, 1 };
+        float[] vals2 = { 2, 1, 1, 1, 2, 2 };
         Matrix m2 = new Matrix(2, 3, vals2);
 
+        Matrix mult = new Matrix(3, 2, vals2);
         Debug.Log(m2.ToString());
 
         Matrix result = m + m2;
 
-        Debug.Log(result.ToString());
+        Debug.Log($"sum result \n{result.ToString()}");
+
+        Matrix result2 = m * mult;
+
+        Debug.Log($"mult result \n{result2.ToString()}");
 
     }
-   
+
+
 }
