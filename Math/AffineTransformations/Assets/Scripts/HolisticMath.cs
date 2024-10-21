@@ -106,6 +106,45 @@ public class HolisticMath
         return result.AsCoords();
     }
 
+    static public Coords Rotate(Coords position, float angleX, bool clockwiseX,
+                                                 float angleY, bool clockwiseY,
+                                                 float angleZ, bool clockwiseZ)
+    {
+        if (clockwiseX) {
+            angleX = 2 * Mathf.PI - angleX;
+        }
+        if (clockwiseY) {
+            angleY = 2 * Mathf.PI - angleY;
+        }
+        if (clockwiseZ) {
+            angleZ = 2 * Mathf.PI - angleZ;
+        }
+
+        float[] xrollValues = {1, 0, 0, 0,
+                               0, Mathf.Cos(angleX), -Mathf.Sin(angleX),0,
+                               0, Mathf.Sin(angleX), Mathf.Cos(angleX), 0,
+                               0, 0, 0, 1};
+        Matrix XRoll = new Matrix(4, 4, xrollValues);
+
+        float[] yrollValues = {Mathf.Cos(angleY), 0, Mathf.Sin(angleY), 0,
+                                0, 1, 0, 0,
+                               -Mathf.Sin(angleY), 0, Mathf.Cos(angleY), 0,
+                                0, 0, 0, 1};
+        Matrix YRoll = new Matrix(4, 4, yrollValues);
+
+        float[] zrollValues = {Mathf.Cos(angleZ), -Mathf.Sin(angleZ), 0, 0, 
+                               Mathf.Sin(angleZ), Mathf.Cos(angleZ), 0, 0,
+                               0, 0, 1, 0,
+                               0, 0, 0, 1};
+        Matrix ZRoll = new Matrix(4, 4, yrollValues);
+
+        Matrix pos = new Matrix(4,1 , position.AsFloats());
+
+        Matrix result = ZRoll * YRoll * XRoll * pos;
+
+        return result.AsCoords();
+    }
+
     static public Coords Scale(Coords position, float scaleX, float scaleY, float scaleZ) {
 
         float[] scaleValues = {scaleX,  0,   0, 0,
