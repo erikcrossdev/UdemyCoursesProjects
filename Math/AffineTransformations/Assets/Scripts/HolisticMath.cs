@@ -93,6 +93,34 @@ public class HolisticMath
         return new Coords(xVal, yVal, zVal);
     }
 
+    static public Coords Translate(Coords position, Coords vector) {
+        float[] translateValues = {1, 0, 0, vector.x,
+                                   0, 1, 0, vector.y,
+                                   0, 0, 1, vector.z,
+                                   0, 0, 0,     1   };    //identity matrix and translate values
+
+        Matrix translateMatrix = new Matrix(4, 4, translateValues);
+        Matrix pos = new Matrix(4, 1, position.AsFloats());
+
+        Matrix result = translateMatrix * pos; //It needs to be in that order to beign able to multiply
+        return result.AsCoords();
+    }
+
+    static public Coords Scale(Coords position, float scaleX, float scaleY, float scaleZ) {
+
+        float[] scaleValues = {scaleX,  0,   0, 0,
+                                 0,  scaleY, 0, 0,
+                                 0, 0, scaleZ, 0,
+                                 0, 0,   0,     1  };
+
+        Matrix scaleMatrix = new Matrix(4, 4, scaleValues);
+        Matrix pos = new Matrix(4, 1, position.AsFloats());
+
+        Matrix result = scaleMatrix * pos; //It needs to be in that order to beign able to multiply
+        return result.AsCoords();
+
+    }
+
     static public Coords Cross(Coords vector1, Coords vector2)
     {
         float xMult = vector1.y * vector2.z - vector1.z * vector2.y;

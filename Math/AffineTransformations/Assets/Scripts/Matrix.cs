@@ -77,7 +77,7 @@ public class Matrix
             for(int j = 0;j<b.cols;j++)
             {
                 for (int k = 0; k < a.cols; k++) {
-                    resultValues[i * b.cols + j] += a.values[i * a.cols + k] + b.values[k * b.cols + j];
+                    resultValues[i * b.cols + j] += a.values[i * a.cols + k] * b.values[k * b.cols + j];
                 }
             }
         }
