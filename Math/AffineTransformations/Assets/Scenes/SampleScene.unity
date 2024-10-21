@@ -1517,7 +1517,7 @@ MonoBehaviour:
   - {fileID: 814997126}
   - {fileID: 1859301642}
   center: {fileID: 1971234511}
-  angle: 0
+  angle: {x: 0, y: 30, z: 0}
   translation: {x: 2, y: 2, z: 0}
   scaling: {x: 2, y: 2, z: 2}
 --- !u!1 &1971234511
