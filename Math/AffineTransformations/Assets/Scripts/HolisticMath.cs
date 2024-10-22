@@ -160,6 +160,39 @@ public class HolisticMath
 
     }
 
+    static public Coords Shear(Coords position, float shearX, float shearY, float shearZ) {
+
+        float[] shearValues = { 1, shearY, shearZ, 0,
+                                shearX, 1, shearZ, 0,
+                                shearX, shearY, 1, 0,
+                                   0, 0, 0, 1};
+
+        Matrix shearMatrix = new Matrix(4, 4, shearValues);
+        Matrix pos = new Matrix(4, 1, position.AsFloats());
+
+        Matrix result = shearMatrix * pos; //It needs to be in that order to beign able to multiply
+        return result.AsCoords();
+    }
+
+    static public Coords Reflect(Coords position, bool flipX, bool flipY, bool flipZ) {
+
+        float x = flipX ? -1 : 1;
+        float y = flipY ? -1 : 1;
+        float z = flipZ ? -1 : 1;
+
+        float[] reflectValues = {x, 0, 0 , 0,
+                                 0, y, 0, 0,
+                                 0, 0, z, 0,
+                                 0, 0, 0, 1};
+
+        Matrix reflectionMatrix = new Matrix(4, 4, reflectValues);
+        Matrix pos = new Matrix(4, 1, position.AsFloats());
+
+        Matrix result = reflectionMatrix * pos;
+        return result.AsCoords();
+    
+    }
+
     static public Coords Cross(Coords vector1, Coords vector2)
     {
         float xMult = vector1.y * vector2.z - vector1.z * vector2.y;
